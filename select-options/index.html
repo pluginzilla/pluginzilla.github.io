@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Select</title>
+    <link rel="stylesheet" href="resources/css/jquery.jstable.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div id="bookmarkFolderSelection">
+</div>
+
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/faker.js"></script>
+<script src="resources/js/jquery.selectjs.js"></script>
+
+<script>
+var bookmarkFolders = ["Service","Build","Delivery","Engineering","Sales","Test Plan","Basics","DAL","Incoming Correspondence","Outgoing Correspondence","Connectors","Valkiakoski","Engineering Report","Fld-Test-01","Certifications","Ulvila","Proposal Volumes","RFP Documents","Contract Documentation","Correspondence","Proposal Estimates"];
+
+    $('#bookmarkFolderSelection').selectjs({
+        title: "Bookmark Folder",
+        firstOption: "-Select-",
+        elementName: "bookmarkFolder",
+        elementId: "bookmarkFolder",
+        valueGeneration: false,
+        data: bookmarkFolders,
+        onchangeEvent: function(){
+            console.log(this.value);
+        }
+    });
+
+</script>
+</body>
+</html>
+
+
+
+ 
