@@ -5,22 +5,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jquery.paginate.js Basic Demo</title>
-<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="src/jquery.paginate.css" />
+	<link rel="stylesheet" href="../css/design.css" />
+	<link rel="stylesheet" href="src/jquery.paginate2.css" />
 	<style>
 		body { font: 16px/1.5 'Roboto', sans-serif; background-color:#fafafa; }
 		.container { width: 800px; margin: 150px auto; }
 		.paginate { padding: 0; margin: 0; }
 		.paginate > li { list-style: none; padding: 10px 20px; border: 1px solid #ddd; margin: 10px 0; }
 	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </head>
 <body>
-<div id="jquery-script-menu">
-<h1>Pagination Example</h1>
+<div class="jquery-script-menu">
+	<h1>jquery.paginate2.js Basic Demo</h1>
+<a href="../">Home</a>
 </div>
 	<div class="container" id="productList_categories">
-	<h1>jquery.paginate.js Basic Demo</h1>
+	
 		<!-- Jokes by http://pyjok.es/ -->
 		<ul id="products">
 			<li>
@@ -74,11 +78,12 @@
 		</ul>
 	</div>
 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="src/jquery.paginate.js"></script>
+	<script src="src/jquery.paginate2.js"></script>
 
 	<script>
 		//call paginate
 		$('#products').paginate({
+		  title: 'Comment List',
 
 		  // how many items per page
 		  perPage:                3,      
@@ -90,7 +95,8 @@
 		  scope:                  '',         
 
 		  // defines where the pagination will be displayed    
-		  paginatePosition:       ['top','bottom'],     
+		  paginatePosition:       ['bottom'],    
+		  searchInputPosition: ['top'], 
 
 		  // Pagination selectors
 		  containerTag:           'nav',
@@ -104,81 +110,6 @@
 		  // Triggered when a pagination link is clicked
 		  onPageClick:            function() {}   
 		  
-		});
-		$('#search').keyup(function(){
-			// Start : Regenerate Product List 
-			if (this.value=="") {
-				var productList = [];
-				var productListContainer = document.getElementById('products');
-				var lis = productListContainer.getElementsByTagName("li");
-				for (var i=0;i<lis.length;i++) {
-					var details = lis[i].innerText.trim();
-					productList.push(lis[i].innerText);
-				}
-
-				console.log(productListContainer);
-
-				productListContainer.innerHTML = "";
-				productListContainer.remove();
-				
-				var ul = document.createElement('ul');
-				ul.id = "products";
-				//productListContainer.innerHTML = "";
-				var productListCategories = document.getElementById("productList_categories");
-				var navs = productListCategories.getElementsByTagName("nav");
-				if (navs.length>0) {
-					navs[0].remove();
-				}
-				
-				for (var i = 0; i < productList.length; i++) {
-					var li = document.createElement('li');
-					li.classList.add("exa-faceting-list-li");
-					li.style.display = "flex";
-					li.style.opacity = "1";
-					var span = document.createElement('span');
-					span.classList.add("exa-faceting-list-li-aggr");
-					span.appendChild(document.createTextNode("1"));
-					//li.appendChild(span);
-					var ancr = document.createElement('a');
-					ancr.classList.add("exa-faceting-list-li-a");
-					//ancr.href = "portfolioproductlinegate2?products.r=%2Bf%2Frel_product_rel_product_marketing_name%2F" + productList[i].toLowerCase().split(" ").join("%20");
-					ancr.style.paddingLeft = "0px";
-					ancr.appendChild(document.createTextNode(productList[i]));
-					li.appendChild(ancr);
-					ul.appendChild(li);
-				}
-				productListCategories.appendChild(ul);
-				
-				$("#products").paginate({
-					perPage: 6,
-					autoScroll: false,
-					scope: '',
-					paginatePosition: ['bottom'],
-					// Pagination selectors
-					containerTag: 'nav',
-					paginationTag: 'li',
-					itemTag: 'li',
-					linkTag: 'a',
-					// Determines whether or not the plugin makes use of hash locations
-					useHashLocation: false,
-					// Triggered when a pagination link is clicked
-					onPageClick: function() {}
-				});
-				var productListCategories = document.getElementById("productList_categories");
-				if (productListCategories != undefined) {
-					var navs = productListCategories.getElementsByTagName('nav');
-					if (navs.length > 0) {
-						var navElement = navs[0];
-						var navClassName = navElement.className;
-						//navClassName = navClassName + " wuid Fo5xImb3 Fo5xImb3_0_portfolioproductlinegate2 searchWidget pagination";
-						navClassName = navClassName + " pagination";
-						navElement.className = navClassName;
-					}
-				}
-				console.log("#Pagination initialized...");
-				// End : Regenerate Product List 
-			}
-			
 		});
 	</script>
 

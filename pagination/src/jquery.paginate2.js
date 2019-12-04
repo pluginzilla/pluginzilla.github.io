@@ -15,11 +15,12 @@
             #Defaults
         */
         var defaults = {
+            title:                'Item List', 
             perPage:                3,              //how many items per page
             autoScroll:             true,           //boolean: scroll to top of the container if a user clicks on a pagination link
             scope:                  '',             //which elements to target
             paginatePosition:       ['bottom'],     //defines where the pagination will be displayed
-            searchInputPosition:       ['bottom'],     //defines where the pagination will be displayed
+            searchInputPosition:       ['bottom'],     //defines where the search input will be displayed
             containerTag:           'nav',
             paginationTag:          'ul',
             itemTag:                'li',
@@ -50,7 +51,11 @@
 
         var paginationHTML = generatePagination(); //generate HTML for pageination
         var searchInputHTML = generateSearchInput(); //generate HTML for pageination
-
+        
+        if (plugin.settings.title!=null || plugin.settings.title!="") {
+            var title = '<h2>'+plugin.settings.title+'</h2>'
+            $element.before(title);
+        }
         if($.inArray('top', plugin.settings.paginatePosition) > -1) {
             $element.before(paginationHTML);
         }
@@ -162,7 +167,7 @@
         #Generates HTML for pagination (nav)
         */
         var generateSearchInput = function() {
-            var searchInputHTML = '<input type="text" placeholder="Search..."/>';
+            var searchInputHTML = '<input type="text" class="form-control" placeholder="Search..."/>';
             return searchInputHTML;
         }
             /*
