@@ -1,0 +1,478 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jquery.paginate.js Basic Demo</title>
+	<link rel="stylesheet" href="../css/design.css" />
+	<style>
+		body { font: 16px/1.5 'Roboto', sans-serif; background-color:#fafafa; }
+		.container { width: 800px; margin: 150px auto; }
+		.paginate { padding: 0; margin: 0; }
+		.paginate > li { list-style: none; padding: 10px 20px; border: 1px solid #ddd; margin: 10px 0; }
+	</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="jquery-script-menu">
+    <h1>jquery.table2.js Basic Demo</h1>
+<a href="../">Home</a>
+</div>
+<div class="row well" id="productList_categories">
+    
+        <!-- Jokes by http://pyjok.es/ -->
+        <button id="loadDefault">Load Default</button>
+        <button id="loadData">Load 100000 Data</button>
+    
+    <div id="tableContainer" style="width:80%">
+        <p>Table manipulation</p>
+        <table class="table table-hover" id="example" >
+        </table>
+    </div>
+
+    </div>
+	
+
+    <script src="resources/js/jquery.js"></script>
+    <script src="resources/js/faker.js"></script>
+    <script src="resources/js/jquery.table2.js"></script>
+    
+    <script>
+
+    var records = [];
+	for (var i=0;i<50;i++) {
+		var firstName = faker.name.firstName();
+		var lastName = faker.name.lastName();
+		var name = firstName + " " + lastName;
+		var fatherName = faker.name.firstName();
+		fatherName += " " +faker.name.lastName();
+
+		var data = {
+			"name" : name,
+			"fatherName" : fatherName,
+			"district" : faker.address.city(),
+			"ssn" : faker.phone.phoneNumber()
+		};
+		records.push(data);
+	}
+	var filteredGates = [{
+    "productId": "65432.9774.58785.22824",
+    "productName": "HP-0000036",
+    "product": "",
+    "productMarketingName": "TOTO HEADBOX",
+    "portfolioDesc": "TOTO PORTFOLIO",
+    "productLineDesc": "",
+    "lastCompletedGate": {
+        "taskName": "G1",
+        "taskDesc": "",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G2",
+        "taskDesc": "",
+        "estStartDate": "3/19/2019 8:00:00 AM"
+    }
+}, {
+    "productId": "65432.9774.26988.8385",
+    "productName": "HP-0000039",
+    "product": "OptiFlo Fourdrinier two layers",
+    "productMarketingName": "OptiFlo Fourdrinier two layers",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Fourdrinier",
+    "lastCompletedGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G4",
+        "taskDesc": "Gate G4",
+        "estStartDate": "5/27/2024 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.515.63469",
+    "productName": "HP-0001235",
+    "product": "T-OptiFlo Gap two layers",
+    "productMarketingName": "T-OptiFlo Gap two layers",
+    "portfolioDesc": "OptiFlo Product Portfolio",
+    "productLineDesc": "OptiFlo Gaps",
+    "lastCompletedGate": {
+        "taskName": "G3",
+        "taskDesc": "Launch",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G4",
+        "taskDesc": "Product ready",
+        "estStartDate": "9/20/2019 8:00:00 AM"
+    }
+}, {
+    "productId": "65432.9774.17818.50138",
+    "productName": "HP-0000047",
+    "product": "OptiFlo Gap one layer with aqua technology",
+    "productMarketingName": "OptiFlo Gap one layer with aqua technology",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Gap",
+    "lastCompletedGate": {
+        "taskName": "G2",
+        "taskDesc": "Gate G2",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "estStartDate": "4/3/2023 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.55105.31928",
+    "productName": "HP-0000040",
+    "product": "OptiFlo Fourdrinier one layer with integrated attenuator",
+    "productMarketingName": "OptiFlo Fourdrinier one layer with integrated attenuator",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Fourdrinier",
+    "lastCompletedGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G4",
+        "taskDesc": "Gate G4",
+        "estStartDate": "5/27/2024 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.12819.26668",
+    "productName": "HP-0001236",
+    "product": "T-OptiFlo Gap one layer with aqua technology1",
+    "productMarketingName": "T-OptiFlo Gap one layer with aqua technology1",
+    "portfolioDesc": "OptiFlo Product Portfolio All OptiFlo Products",
+    "productLineDesc": "OptiFlo Gaps",
+    "lastCompletedGate": {
+        "taskName": "G2",
+        "taskDesc": "Prototype readiness",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G3",
+        "taskDesc": "Launch",
+        "estStartDate": "9/16/2022 8:00:00 AM"
+    }
+}, {
+    "productId": "65432.9774.37629.32112",
+    "productName": "HP-0001237",
+    "product": "T-OptiFlo Gap two layers with aqua technology1",
+    "productMarketingName": "T-OptiFlo Gap two layers with aqua technology1",
+    "portfolioDesc": "",
+    "productLineDesc": "",
+    "lastCompletedGate": {
+        "taskName": "G4",
+        "taskDesc": "Product ready",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G5",
+        "taskDesc": "Descenting product",
+        "estStartDate": "3/2/2020 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.35272.63555",
+    "productName": "HP-0000013",
+    "product": "OptiFlo one layer",
+    "productMarketingName": "OptiFlo Fourdrinier one layer",
+    "portfolioDesc": "",
+    "productLineDesc": "",
+    "lastCompletedGate": {
+        "taskName": "G4",
+        "taskDesc": "Gate G4",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G5",
+        "taskDesc": "Gate G5",
+        "estStartDate": "3/27/2028 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.12586.3023",
+    "productName": "HP-0000048",
+    "product": "OptiFlo Gap two layers with aqua technology",
+    "productMarketingName": "OptiFlo Gap two layers with aqua technology",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Gap",
+    "lastCompletedGate": {
+        "taskName": "G2",
+        "taskDesc": "Gate G2",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "estStartDate": "4/3/2023 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.53238.45813",
+    "productName": "HP-0000044",
+    "product": "OptiFlo Fourdrinier three layers",
+    "productMarketingName": "OptiFlo Fourdrinier three layers",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Fourdrinier",
+    "lastCompletedGate": {
+        "taskName": "G2",
+        "taskDesc": "Gate G2",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "estStartDate": "4/3/2023 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.8423.37558",
+    "productName": "HP-0000041",
+    "product": "OptiFlo Fourdrinier one layer with aqua technology",
+    "productMarketingName": "OptiFlo Fourdrinier one layer with aqua technology",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Fourdrinier",
+    "lastCompletedGate": {
+        "taskName": "G2",
+        "taskDesc": "Gate G2",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "estStartDate": "4/3/2023 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.58320.64506",
+    "productName": "HP-0000046",
+    "product": "OptiFlo Gap two layers",
+    "productMarketingName": "OptiFlo Gap two layers",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Gap",
+    "lastCompletedGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G4",
+        "taskDesc": "Gate G4",
+        "estStartDate": "5/27/2024 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.15624.3895",
+    "productName": "HP-0000042",
+    "product": "OptiFlo Fourdrinier two layers with aqua technology",
+    "productMarketingName": "OptiFlo Fourdrinier two layers with aqua technology",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Fourdrinier",
+    "lastCompletedGate": {
+        "taskName": "G2",
+        "taskDesc": "Gate G2",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "estStartDate": "4/3/2023 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.61552.11058",
+    "productName": "HP-0001234",
+    "product": "T-OptiFlo Gap one layer",
+    "productMarketingName": "T-OptiFlo Gap one layer",
+    "portfolioDesc": "",
+    "productLineDesc": "",
+    "lastCompletedGate": {
+        "taskName": "G3",
+        "taskDesc": "G3-Launch",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G4",
+        "taskDesc": "G4-Product ready",
+        "estStartDate": "9/9/2019 8:00:00 AM"
+    }
+}, {
+    "productId": "65432.9774.36799.8499",
+    "productName": "HP-0000043",
+    "product": "OptiFlo Secondary Headbox",
+    "productMarketingName": "OptiFlo Secondary Headbox",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Fourdrinier",
+    "lastCompletedGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G4",
+        "taskDesc": "Gate G4",
+        "estStartDate": "5/27/2024 5:00:00 PM"
+    }
+}, {
+    "productId": "65432.9774.49511.53374",
+    "productName": "HP-0000045",
+    "product": "OptiFlo Gap one layer",
+    "productMarketingName": "OptiFlo Gap one layer",
+    "portfolioDesc": "All OptiFlo Products",
+    "productLineDesc": "OptiFlo Gap",
+    "lastCompletedGate": {
+        "taskName": "G3",
+        "taskDesc": "Gate G3",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G1",
+        "taskDesc": "Gate G1",
+        "estStartDate": "10/22/2019 8:00:00 AM"
+    }
+}, {
+    "productId": "65432.9774.56970.30357",
+    "productName": "HP-0000035",
+    "product": "TITI HEADBOX",
+    "productMarketingName": "TITI HEADBOX",
+    "portfolioDesc": "TOTO PORTFOLIO",
+    "productLineDesc": "",
+    "lastCompletedGate": {
+        "taskName": "G2",
+        "taskDesc": "",
+        "onTime": true
+    },
+    "nextGate": {
+        "taskName": "G3",
+        "taskDesc": "",
+        "estStartDate": "3/19/2019 8:00:00 AM"
+    }
+}];
+
+// https://3dpassport-18xdev2.plm.valmet.com:8280/3dpassport/login?service=https%3A%2F%2F3dspace-18xdev2.plm.valmet.com%3A8180%2F3dspace%2Fcommon%2FemxNavigator.jsp%3FobjectId%3D" + productGateInformation.productId  
+    var gatesDataUpdated = [];
+
+    for (var i=0;i<filteredGates.length;i++) {
+        var prepared = "<a target='_BLANK' href='https://3dpassport-18xdev2.plm.valmet.com:8280/3dpassport/login?service=https%3A%2F%2F3dspace-18xdev2.plm.valmet.com%3A8180%2F3dspace%2Fcommon%2FemxNavigator.jsp%3FobjectId%3D"+filteredGates[i].productId+"'>"+filteredGates[i].productName+"</a>";
+        var record = filteredGates[i];
+        record.productName = prepared;
+        if (record.nextGate.estStartDate !== undefined) {
+            record.nextGate.estStartDate = record.nextGate.estStartDate.split(" ")[0];
+        }
+        gatesDataUpdated.push(record);
+    }
+	$('#example').table2({
+		thead: ["Selected Product Details", "Selected Product Description", "Last Gate Completed Gate Name", "Last Completed Gate Description","Next Scheduled Gate Name","Next gate scheduled description","Next gate scheduled date"],
+        tbody: gatesDataUpdated,
+        allowedKeys: ["productName", "product", "lastCompletedGate.taskName","lastCompletedGate.taskDesc", "nextGate.taskName", "nextGate.taskDesc","nextGate.estStartDate"],
+        searchable: [false, false, false, false, false, false, false],
+        sortable: [false, false, false, false, false, false, false],
+        alignments: ["center", "left", "center", "left", "center", "left", "center"],
+		pagination : true,
+		actionButtons : false,
+		perPage : 10,
+		globalSearch : false
+    });
+    /*$('#gatesTable').table2({
+            thead: ["Selected Product Details", "Selected Product Description", "Last Gate Completed Gate Name", "Last Completed Gate Description","Next Scheduled Gate Name","Next gate scheduled description","Next gate scheduled date"],
+            tbody: filteredGates,
+            allowedKeys: ["productName", "product", "lastCompletedGate.taskName","lastCompletedGate.taskDesc", "nextGate.taskName", "nextGate.taskDesc","nextGate.estStartDate"],
+            searchable: [false, false, false, false],
+            pagination : false,
+            actionButtons : false,
+            perPage : 10,
+            globalSearch : false
+        });*/
+    
+    var secondData = [{
+        "productId": "65432.9774.58785.22824",
+        "productName": "New Product",
+        "product": "",
+        "productMarketingName": "TOTO HEADBOX",
+        "portfolioDesc": "TOTO PORTFOLIO",
+        "productLineDesc": "",
+        "lastCompletedGate": {
+            "taskName": "G1",
+            "taskDesc": "",
+            "onTime": true
+        },
+        "nextGate": {
+            "taskName": "G2",
+            "taskDesc": "",
+            "estStartDate": "3/19/2019 8:00:00 AM"
+        }
+    },{
+        "productId": "65432.9774.58785.22824",
+        "productName": "New Product 2",
+        "product": "",
+        "productMarketingName": "TOTO HEADBOX",
+        "portfolioDesc": "TOTO PORTFOLIO",
+        "productLineDesc": "",
+        "lastCompletedGate": {
+            "taskName": "G1",
+            "taskDesc": "",
+            "onTime": true
+        },
+        "nextGate": {
+            "taskName": "G2",
+            "taskDesc": "",
+            "estStartDate": "3/19/2019 8:00:00 AM"
+        }
+    },{
+        "productId": "65432.9774.58785.22824",
+        "productName": "New Product 3",
+        "product": "",
+        "productMarketingName": "TOTO HEADBOX",
+        "portfolioDesc": "TOTO PORTFOLIO",
+        "productLineDesc": "",
+        "lastCompletedGate": {
+            "taskName": "G1",
+            "taskDesc": "",
+            "onTime": true
+        },
+        "nextGate": {
+            "taskName": "G2",
+            "taskDesc": "",
+            "estStartDate": "3/19/2019 8:00:00 AM"
+        }
+    }];
+    
+    $("#loadData").click(function(){
+        var existing = $('#example');
+        var parent = existing.parent;
+        
+        console.log(existing);
+        var classes = existing[0].className;
+        
+        existing.remove();
+
+        var table = document.createElement('table');
+        table.id = "example";
+        table.className = classes;
+        $('#tableContainer').append(table);
+
+        $('#example').table2({
+            thead: ["Product Name", "Description", "Last Completed Gate", "Next Gate","Start Date"],
+            tbody: secondData,
+            allowedKeys: ["productName", "productMarketingName", "lastCompletedGate.taskName", "nextGate.taskName", "nextGate.estStartDate"],
+            searchable: [true, false, false, false],
+            sortable: [true, false, false, false],
+            alignments: ["left", "left", "left", "left"],
+            pagination : true,
+            actionButtons : false,
+            perPage : 10,
+            globalSearch : false
+        });
+    });
+	
+    </script>
+
+	<div class="jquery-script-menu">
+<h1>Plugins Zone With Various Example</h1>
+</div>
+	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+</body>
+</html>
