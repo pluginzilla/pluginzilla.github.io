@@ -153,8 +153,10 @@ if (!('remove' in Element.prototype)) {
 		var bindSearchableEvents = function (table,thead,searchable){
 			for (var j = 0; j < thead.length; j++) {
 				if (searchable[j]) {
+					var currentKey = plugin.settings.allowedKeys[j];
 					var targetTd = j;
 					$("#field"+targetTd+"").keyup(function() {
+						console.log(currentKey);
 						var title = $(this).val();
 						
 						var filter, tr, td, txtValue;
@@ -168,7 +170,6 @@ if (!('remove' in Element.prototype)) {
 									tr[i].style = "";	
 									txtValue = td.textContent || td.innerText;
 									if (txtValue.toUpperCase().indexOf(filter) > -1) {
-										tr[i].removeAttribute("hidden");
 										tr[i].style.display = "table-row";
 									} else {
 										//tr[i].style.display = "";
