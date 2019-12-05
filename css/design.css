@@ -10,9 +10,14 @@
     box-shadow:0 2px 3px 0 rgba(0,0,0,.16);
     z-index:999999;
     padding:10px 0;
+    padding-left:40px;
+    text-align: center;
     -webkit-box-sizing:content-box;
     -moz-box-sizing:content-box;
     box-sizing:content-box
+}
+.jquery-script-menu a{
+    
 }
 .jquery-script-center{
     width:960px;
