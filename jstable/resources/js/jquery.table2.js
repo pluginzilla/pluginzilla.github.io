@@ -68,6 +68,8 @@ if (!('remove' in Element.prototype)) {
 		}
 		var drawTableBody = function (table,tbody,keys){
 			var body = document.createElement('tbody');
+            var pagination = plugin.settings.pagination;
+			var perPage = plugin.settings.perPage;
 
 			for (var i = 0; i < tbody.length; i++) {
 				//var row = table.insertRow(lastRowIndex++);
@@ -97,9 +99,102 @@ if (!('remove' in Element.prototype)) {
 
 			}
 			table.appendChild(body);
+			if (pagination) {
+
+				var rowCountId = table.id + "-rowcount";
+				var existing = document.getElementById(rowCountId);
+				if (existing!=null) {
+					existing.remove();
+				}
+
+				var select = document.createElement("select");
+				select.id = rowCountId;
+				
+				var option = document.createElement("option");
+				option.text = "5";
+				select.appendChild(option);
+
+				option = document.createElement("option");
+				option.text = "10";
+				select.appendChild(option);
+
+				option = document.createElement("option");
+				option.text = "15";
+				select.appendChild(option);
+				select.value = plugin.settings.perPage;
+
+				table.before(select);
+				
+
+				$('#'+table.id+'-rowcount').change(function(){
+					plugin.settings.perPage = this.value;
+					drawPaginatedTable(table,1);				
+				});
+				if (plugin.settings.globalSearch) {
+					var filtering = table.id + "-filtering";
+					var existing = document.getElementById(filtering);
+					if (existing!=null) {
+						existing.remove();
+					}
+					
+					var input = document.createElement("input");
+					input.id = filtering;
+					input.placeholder = "Search...";
+
+					table.before(input);
+					$('#'+table.id+'-filtering').keyup(function(){
+						var title = $(this).val();
+							
+							var filter, td, txtValue;
+							filter = title.toUpperCase();
+							//table = document.getElementById("example");
+							var trs = table.getElementsByTagName("tr");
+							if (filter!="") {
+								for (var i = 2; i < trs.length; i++) {
+									var tr = trs[i];
+									var tds = tr.getElementsByTagName("td");
+									var isFound = false;
+									for(var j=0; j<tds.length; j++) {
+										td = tds[j];
+										if (td) {
+											txtValue = td.textContent || td.innerText;
+											if (txtValue.toUpperCase().indexOf(filter) > -1) {
+												isFound = true;
+												break;
+											} else {
+												isFound = false;
+											}
+										}
+									}
+									if (isFound) {
+										tr.style.display = "table-row";
+									} else {
+										tr.style.display = "none";
+									}
+									
+								}
+								$('#'+table.id+'-pagination').hide();
+							} else {
+								//generateTable();
+								// if (plugin.settings.pagination) {
+								// 	drawPaginatedTable(table,1);
+								// 	//drawPaginationLinks(table,1);
+								// 	$('#'+table.id+'-pagination').show();
+								// }
+								drawPaginatedTable(table,1);
+								//drawTableBody(table,plugin.settings.tbody,plugin.settings.allowedKeys)
+							}
+							
+										
+					});
+				}
+				
+				drawPaginatedTable(table,1);
+			}
 		}
         var drawPaginatedTable = function (table,pageNo) {
 			var currentPage = 0;
+			
 			var trs = table.getElementsByTagName("tr");
 			var startIndex = plugin.settings.searchable.indexOf(true)>-1 ? 2 : 1;
 			for (var i = startIndex; i < trs.length; i++) {
@@ -179,12 +274,13 @@ if (!('remove' in Element.prototype)) {
 							}
 							$('#'+table.id+'-pagination').hide();
 						} else {
-							if (plugin.settings.pagination) {
-								drawPaginatedTable(table,1);
-								//drawPaginationLinks(table,1);
-								$('#'+table.id+'-pagination').show();
-							}
-							
+							//generateTable();
+							// if (plugin.settings.pagination) {
+							// 	drawPaginatedTable(table,1);
+							// 	//drawPaginationLinks(table,1);
+							// 	$('#'+table.id+'-pagination').show();
+							// }
+							drawTableBody(table,plugin.settings.tbody,plugin.settings.allowedKeys)
 						}
 						
 						
@@ -213,8 +309,6 @@ if (!('remove' in Element.prototype)) {
 			
             var table = $element[0];
             var searchableRow = true;
-            var pagination = plugin.settings.pagination;
-			var perPage = plugin.settings.perPage;
 			var searchable = plugin.settings.searchable;
             
             if (columns.length == allowedKeys.length) {
@@ -225,12 +319,6 @@ if (!('remove' in Element.prototype)) {
                 }
                 drawTableBody(table,tbody,allowedKeys);
                 
-                if (pagination) {
-                    
-                    //drawPaginatedTable(table,0,false,perPage);
-					//drawPaginationLinks(table,1);
-					drawPaginatedTable(table,1);
-                }
             } else {
                 alert('Error: Unable to draw!');
             }
